@@ -1,0 +1,55 @@
+[
+  {
+    "employeeId": "EMP1001",
+    "name": "Amit Sharma",
+    "age": 32,
+    "department": "Engineering",
+    "position": "Senior Software Engineer",
+    "email": "amit.sharma@company.com",
+    "phone": "+91-9876543210",
+    "joiningDate": "2021-03-15",
+    "salary": 1200000,
+    "skills": ["React", "Node.js", "MongoDB", "Python"],
+    "performance": "Excellent",
+    "projects": ["E-commerce Platform", "Inventory Management"],
+    "leaveBalance": 15,
+    "address": "Mumbai, Maharashtra"
+  },
+  {
+    "employeeId": "EMP1002",
+    "name": "Priya Patel",
+    "age": 28,
+    "department": "Marketing",
+    "position": "Marketing Manager",
+    "email": "priya.patel@company.com",
+    "phone": "+91-9876543211",
+    "joiningDate": "2022-01-10",
+    "salary": 950000,
+    "skills": ["Digital Marketing", "SEO", "Content Strategy", "Analytics"],
+    "performance": "Good",
+    "projects": ["Brand Campaign 2024", "Social Media Strategy"],
+    "leaveBalance": 12,
+    "address": "Bangalore, Karnataka"
+  },
+  {
+    "employeeId": "EMP1003",
+    "name": "Rajesh Kumar",
+    "age": 45,
+    "department": "Human Resources",
+    "position": "HR Director",
+    "email": "rajesh.kumar@company.com",
+    "phone": "+91-9876543212",
+    "joiningDate": "2018-06-20",
+    "salary": 1800000,
+    "skills": [
+      "Recruitment",
+      "Employee Relations",
+      "Performance Management",
+      "Training"
+    ],
+    "performance": "Outstanding",
+    "projects": ["HR Digital Transformation", "Employee Wellness Program"],
+    "leaveBalance": 20,
+    "address": "Delhi, NCR"
+  }
+]
