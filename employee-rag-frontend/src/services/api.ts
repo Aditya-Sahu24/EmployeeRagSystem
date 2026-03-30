@@ -1,4 +1,3 @@
-import axios from "axios";
 import type {
   Employee,
   EmployeesResponse,
@@ -6,6 +5,7 @@ import type {
   Statistics,
   ApiResponse,
 } from "../types";
+import axios from "axios";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL || "https://employeeragsystem.onrender.com/api";
