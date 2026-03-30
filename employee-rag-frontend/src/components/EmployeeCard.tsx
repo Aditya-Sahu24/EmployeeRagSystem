@@ -1,5 +1,87 @@
+// import React from 'react';
+// import { Briefcase, Mail, MapPin, Edit, Trash2 } from 'lucide-react';
+// import type { Employee } from '../types';
+
+// interface EmployeeCardProps {
+//   employee: Employee;
+//   onClick: (employee: Employee) => void;
+//   onEdit: (employee: Employee) => void;
+//   onDelete: (employee: Employee) => void;
+// }
+
+// export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee, onClick, onEdit, onDelete }) => {
+//   return (
+//     <div className="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+//       <div
+//         className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 cursor-pointer"
+//         onClick={() => onClick(employee)}
+//       >
+//         <div className="flex justify-between items-start">
+//           <div>
+//             <h3 className="text-white font-bold text-lg">{employee.name}</h3>
+//             <p className="text-blue-100 text-sm">{employee.position}</p>
+//           </div>
+//           <div className="bg-white/20 rounded-lg px-2 py-1">
+//             <span className="text-white text-xs font-medium">{employee.employeeId}</span>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="p-4 space-y-3">
+//         <div className="flex items-center text-gray-600">
+//           <Briefcase className="w-4 h-4 mr-2" />
+//           <span className="text-sm">{employee.department}</span>
+//         </div>
+//         <div className="flex items-center text-gray-600">
+//           <Mail className="w-4 h-4 mr-2" />
+//           <span className="text-sm">{employee.email}</span>
+//         </div>
+//         <div className="flex items-center text-gray-600">
+//           <MapPin className="w-4 h-4 mr-2" />
+//           <span className="text-sm">{employee.address || 'Not specified'}</span>
+//         </div>
+
+//         {employee.skills && employee.skills.length > 0 && (
+//           <div className="flex flex-wrap gap-1 pt-2">
+//             {employee.skills.slice(0, 3).map((skill, idx) => (
+//               <span key={idx} className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full">
+//                 {skill}
+//               </span>
+//             ))}
+//             {employee.skills.length > 3 && (
+//               <span className="text-xs text-gray-500">+{employee.skills.length - 3}</span>
+//             )}
+//           </div>
+//         )}
+
+//         <div className="flex gap-2 pt-2">
+//           <button
+//             onClick={(e) => { e.stopPropagation(); onEdit(employee); }}
+//             className="flex-1 bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition text-sm flex items-center justify-center gap-1"
+//           >
+//             <Edit className="w-3 h-3" />
+//             Edit
+//           </button>
+//           <button
+//             onClick={(e) => { e.stopPropagation(); onDelete(employee); }}
+//             className="flex-1 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition text-sm flex items-center justify-center gap-1"
+//           >
+//             <Trash2 className="w-3 h-3" />
+//             Delete
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+
+
+
+
 import React from 'react';
-import { Briefcase, Mail, MapPin, Edit, Trash2 } from 'lucide-react';
+import { Mail, Phone, Edit2, Trash2, Calendar, TrendingUp } from 'lucide-react';
 import type { Employee } from '../types';
 
 interface EmployeeCardProps {
@@ -9,65 +91,91 @@ interface EmployeeCardProps {
   onDelete: (employee: Employee) => void;
 }
 
+const perfColor: Record<string, string> = {
+  Outstanding: '#10b981',
+  Excellent: '#6366f1',
+  Good: '#f59e0b',
+  Average: '#94a3b8',
+};
+
+const initials = (name: string) =>
+  name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+
 export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee, onClick, onEdit, onDelete }) => {
+  const color = perfColor[employee.performance] || '#94a3b8';
+
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-      <div
-        className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 cursor-pointer"
-        onClick={() => onClick(employee)}
-      >
-        <div className="flex justify-between items-start">
-          <div>
-            <h3 className="text-white font-bold text-lg">{employee.name}</h3>
-            <p className="text-blue-100 text-sm">{employee.position}</p>
-          </div>
-          <div className="bg-white/20 rounded-lg px-2 py-1">
-            <span className="text-white text-xs font-medium">{employee.employeeId}</span>
-          </div>
-        </div>
-      </div>
+    <div className="emp-card" onClick={() => onClick(employee)}>
+      {/* Top accent bar */}
+      <div className="emp-card-bar" style={{ background: color }} />
 
-      <div className="p-4 space-y-3">
-        <div className="flex items-center text-gray-600">
-          <Briefcase className="w-4 h-4 mr-2" />
-          <span className="text-sm">{employee.department}</span>
-        </div>
-        <div className="flex items-center text-gray-600">
-          <Mail className="w-4 h-4 mr-2" />
-          <span className="text-sm">{employee.email}</span>
-        </div>
-        <div className="flex items-center text-gray-600">
-          <MapPin className="w-4 h-4 mr-2" />
-          <span className="text-sm">{employee.address || 'Not specified'}</span>
+      <div className="emp-card-body">
+        {/* Header */}
+        <div className="emp-card-header">
+          <div className="emp-initials" style={{ background: color + '20', color }}>
+            {initials(employee.name)}
+          </div>
+          <div className="emp-id-badge">{employee.employeeId}</div>
         </div>
 
+        {/* Name & Role */}
+        <div className="emp-card-info">
+          <h3 className="emp-name">{employee.name}</h3>
+          <p className="emp-position">{employee.position}</p>
+          <p className="emp-department">{employee.department}</p>
+        </div>
+
+        {/* Stats row */}
+        <div className="emp-stats">
+          <div className="emp-stat">
+            <TrendingUp size={12} />
+            <span style={{ color }}>{employee.performance}</span>
+          </div>
+          <div className="emp-stat">
+            <Calendar size={12} />
+            <span>{employee.joiningDate}</span>
+          </div>
+        </div>
+
+        {/* Contact */}
+        <div className="emp-contact">
+          <div className="emp-contact-row">
+            <Mail size={12} />
+            <span>{employee.email}</span>
+          </div>
+          {employee.phone && (
+            <div className="emp-contact-row">
+              <Phone size={12} />
+              <span>{employee.phone}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Skills */}
         {employee.skills && employee.skills.length > 0 && (
-          <div className="flex flex-wrap gap-1 pt-2">
-            {employee.skills.slice(0, 3).map((skill, idx) => (
-              <span key={idx} className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full">
-                {skill}
-              </span>
+          <div className="emp-skills">
+            {employee.skills.slice(0, 3).map((skill, i) => (
+              <span key={i} className="skill-tag">{skill}</span>
             ))}
             {employee.skills.length > 3 && (
-              <span className="text-xs text-gray-500">+{employee.skills.length - 3}</span>
+              <span className="skill-more">+{employee.skills.length - 3}</span>
             )}
           </div>
         )}
 
-        <div className="flex gap-2 pt-2">
-          <button
-            onClick={(e) => { e.stopPropagation(); onEdit(employee); }}
-            className="flex-1 bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition text-sm flex items-center justify-center gap-1"
-          >
-            <Edit className="w-3 h-3" />
-            Edit
+        {/* Salary */}
+        <div className="emp-salary">
+          ₹{Number(employee.salary).toLocaleString('en-IN')}
+          <span className="emp-salary-label">/year</span>
+        </div>
+
+        {/* Actions */}
+        <div className="emp-actions" onClick={e => e.stopPropagation()}>
+          <button className="emp-btn emp-btn-edit" onClick={() => onEdit(employee)}>
+            <Edit2 size={13} /> Edit
           </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); onDelete(employee); }}
-            className="flex-1 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition text-sm flex items-center justify-center gap-1"
-          >
-            <Trash2 className="w-3 h-3" />
-            Delete
+          <button className="emp-btn emp-btn-delete" onClick={() => onDelete(employee)}>
+            <Trash2 size={13} /> Remove
           </button>
         </div>
       </div>
